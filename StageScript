@@ -1,0 +1,27 @@
+while wait(1) do
+	local plr = game.Players.LocalPlayer
+	local pointFolder = workspace:FindFirstChild("PointFolder")
+	local i = plr.leaderstats.Stage.Value
+	while i <= 9999999 do
+		print("-잼-들 무시하고 Stage 클리어")
+		local targetPart = nil
+		if not pointFolder then
+			local PointForder = workspace:FindFirstChild("PointForder")
+			if PointForder then
+				targetPart = PointForder:FindFirstChild(tostring(i))
+			else
+				local checkpoints = workspace:FindFirstChild("Checkpoints")
+				if checkpoints then
+					targetPart = checkpoints:FindFirstChild(tostring(i))
+				end
+			end
+		else
+			targetPart = pointFolder:FindFirstChild(tostring(i))
+		end
+		if targetPart and targetPart:IsA("BasePart") then
+			plr.Character:FindFirstChild("HumanoidRootPart").CFrame = targetPart.CFrame
+		end
+		wait(0.1)
+		i = i + 1
+	end
+end
